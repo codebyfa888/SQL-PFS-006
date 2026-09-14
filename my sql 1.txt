@@ -1,0 +1,149 @@
+MySql- https://docs.google.com/document/d/13RP2LCK1L_4c_wCuHh87muP6ADnKR8ksZb44hEMZTqc/edit?pli=1&tab=t.0
+                               (or)
+               https://tinyurl.com/MYSQLPFSDA-05Notes
+
+Classes: https://tinyurl.com/MySQL-Batch-03
+
+GITHUB: https://github.com/mallikharjuna2000/mysqlqueries
+notes: https://tinyurl.com/MYSQLPFSDA-06Notes
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.What is Frontend
+2.what is Backend
+3.what are Api's
+4.what are Storage areas
+5.Difference between File management system and dbms
+
+
+
+what is data?
+-------------
+raw facts or figures without context
+eg: 150,prem,50000,vsp
+
+what is field?
+--------------
+smallest unit of data in database(column/attribute)
+
+eg: ename, esalary, eadrss, eid
+
+
+what is record?
+--------------
+collection of related fields(row/tuple)
+
+eg:(150,prem,50000,vsp)
+
+
+what is database?
+----------------
+organized collection of related records stored together
+
+eg: an employee database containing all employee records.
+
+
+
+
+client-server-architecture
+==========================
+client: the role of the client in client-server-architecture is to send request to the server and get the response from the server.
+
+server: the role of the server in client-server-architecture is to take request from the client. if the request is valid it will generate some response and we can handover it to client or else it will raise error if the request is not valid.
+
+protocol: it has a set of rules and regulations. the role of the protocol in client-server-architecture is to send requests from client to server.
+
+
+
+
+
+
+SQL Identifiers
+----------------
+
+SQL identifiers are names used to identify database objects such as.
+Database names, Table names, Column names, view names, index names, constraints, triggers, stored procedures.
+
+While we are declaring an identifier we have to follow some rules and regulations.
+
+1. the only allowed characters to declare identifiers a-z or A-Z or 0-9,_,$
+2. must begin with a letter or underscore(_).
+3. we can't declare identifiers with reserved keywords.
+4. spaces are not considered to declare identifiers.
+5. identifiers are case sensitive
+6. max length to declare identifiers are 15 characters.
+
+
+
+
+
+
+
+SQL(Structured Query Language)
+==============================
+
+It is a standardized programming language specially designed for managing and manipulating relational databases. it provides a declarative syntax that allows users to define what data they want retrieve, insert, update or delete without specifying exactly how database should execute these operations.
+
+
+
+SQL Commands
+============
+
+DDL: Data definition language
+-----------------------------
+defines and modifies the structure of database objects(tables, schemas, indexes)
+
+
+CREATE: Creates a new database object such as a table, database, view, index, or schema. 
+Syntax: CREATE DATABASE database-name;
+
+Example: CREATE TABLE Students (ID INT, Name VARCHAR(50));
+
+ how to create TABLE
+---------------------
+CREATE TABLE table-name;
+
+
+
+
+ALTER: Modifies the structure of an existing database object, such as adding, deleting, or modifying columns in a table.
+Example: ALTER TABLE Students ADD Email VARCHAR(100);
+
+how to drop table
+---------------------
+drop table table-name;
+
+
+DROP: Permanently deletes an existing database object (table, database, index, view) along with all its data and structure.
+      This action cannot be rolled back in most databases.
+      
+TRUNCATE: Removes all rows/records from a table quickly while keeping the table structure intact for future use.
+          Faster than DELETE as it does not log individual row deletions.
+
+RENAME: Renames an existing database object, such as a table or column, to a new name without changing its structure or data.
+
+
+
+
+
+
+
+
+
+
+DML: Data manipulation language
+------------------------------
+manages data stored in database objects(insert, update, delete)
+
+DCL: Data control language
+--------------------------
+manages permissions and access control on database objects
+
+TCL: Transaction control language
+---------------------------------
+manages transaction to maintain data integrity
+
+DQL: Data query language
+------------------------
+used to fetch/retrieve data from the database
+
+

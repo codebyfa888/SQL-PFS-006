@@ -1,0 +1,279 @@
+Constraints
+-------------
+constraints are rules applied to a table columns in MYSQL to ensure that only valid and accurate data is stored in the database.
+
+in simple words
+---------------
+constraints = rules that control the data entered into a table.
+
+why do we use constraints?
+-------------------------
+constraints are used to 
+1.maintain data integrity
+2.prevent invalid data integrity.
+3.avoid duplicate records
+4.ensures relationships between tables,
+5.make the database reliable and consistent.
+  
+integrity constraints
+---------------------
+1.not null
+----------------
+==> the not null constraints ensures that a column cannot contain Null(empty)values. Every row must have a value for that column. ==>not null: doesn't allow null values.
+----------------
+2.unique
+----------------
+==> the unique key constraint ensures that all values in a column are different, duplicate values are not allowed.
+----------------
+3.primary key
+==> It is combination of unique and not null constraints. 
+----------------
+4.composite key
+==> if we applied more than one primary key then we should use composite key constraint, this is only applicable for table level not a column level.
+----------------
+5.foreign key
+==> A foreign key creates a relationship between two tables. it ensures that value in the child table must already exists in the parent table.
+----------------
+6.default
+==> the default constraint automatically assigns a predefined value if no values is provided during insertion.
+----------------
+7.check
+==> the check constraint ensures that values satisfy a specified condition before insertion or update. 
+----------------
+
+
+
+
+
+Referential actions
+===================
+
+referential actions define what happens to a child table data when parent table data is updated or deleted.
+
+on delete cascade, on update cascade
+
+on delete set null on update set null
+
+
+
+
+
+
+
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 28
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| da6                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> USE DA6;
+Database changed
+mysql> SHOW TABLES;
++---------------+
+| Tables_in_da6 |
++---------------+
+| employees     |
+| staff_records |
++---------------+
+2 rows in set (0.00 sec)
+
+mysql> SHOW TABLE STAFF_RECORDS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'STAFF_RECORDS' at line 1
+mysql> DESC STAFF_RECORDS;
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| Field           | Type                                               | Null | Key | Default | Extra |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| COMPANY_NAME    | varchar(30)                                        | YES  |     | NULL    |       |
+| EMP_ID          | int                                                | YES  |     | NULL    |       |
+| AGE             | tinyint                                            | YES  |     | NULL    |       |
+| EXPERIENCE      | smallint                                           | YES  |     | NULL    |       |
+| GENDER          | char(1)                                            | YES  |     | NULL    |       |
+| EMPLOYEE_NAME   | varchar(60)                                        | YES  |     | NULL    |       |
+| QUALIFICATION   | varchar(30)                                        | YES  |     | NULL    |       |
+| ADDRESS         | tinytext                                           | YES  |     | NULL    |       |
+| SALARY          | decimal(15,9)                                      | YES  |     | NULL    |       |
+| DEPARTMENT      | enum('HR','IT','SALES','FINANCE','SUPPORT')        | YES  |     | NULL    |       |
+| STATUS          | varchar(30)                                        | YES  |     | NULL    |       |
+| SKILLS          | set('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION') | YES  |     | NULL    |       |
+| DATE_OF_JOINING | date                                               | YES  |     | NULL    |       |
+| EMAIL           | tinytext                                           | YES  |     | NULL    |       |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+14 rows in set (0.00 sec)
+       ^C
+mysql> desc employees;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| emp_id       | int           | NO   | PRI | NULL    |       |
+| emp_name     | varchar(100)  | YES  |     | NULL    |       |
+| department   | varchar(50)   | YES  |     | NULL    |       |
+| DESIGNATION  | varchar(100)  | YES  |     | NULL    |       |
+| salary       | decimal(10,2) | YES  |     | NULL    |       |
+| joining_date | date          | YES  |     | NULL    |       |
+| CITY         | varchar(100)  | YES  |     | NULL    |       |
+| EMAIL        | varchar(100)  | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> select * from staff_records;
+Empty set (0.00 sec)
+
+mysql> DESC STAFF_RECORDS;
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| Field           | Type                                               | Null | Key | Default | Extra |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+| COMPANY_NAME    | varchar(30)                                        | YES  |     | NULL    |       |
+| EMP_ID          | int                                                | YES  |     | NULL    |       |
+| AGE             | tinyint                                            | YES  |     | NULL    |       |
+| EXPERIENCE      | smallint                                           | YES  |     | NULL    |       |
+| GENDER          | char(1)                                            | YES  |     | NULL    |       |
+| EMPLOYEE_NAME   | varchar(60)                                        | YES  |     | NULL    |       |
+| QUALIFICATION   | varchar(30)                                        | YES  |     | NULL    |       |
+| ADDRESS         | tinytext                                           | YES  |     | NULL    |       |
+| SALARY          | decimal(15,9)                                      | YES  |     | NULL    |       |
+| DEPARTMENT      | enum('HR','IT','SALES','FINANCE','SUPPORT')        | YES  |     | NULL    |       |
+| STATUS          | varchar(30)                                        | YES  |     | NULL    |       |
+| SKILLS          | set('JAVA','PYTHON','SQL','EXCEL','COMMUNICATION') | YES  |     | NULL    |       |
+| DATE_OF_JOINING | date                                               | YES  |     | NULL    |       |
+| EMAIL           | tinytext                                           | YES  |     | NULL    |       |
++-----------------+----------------------------------------------------+------+-----+---------+-------+
+14 rows in set (0.00 sec)
+
+mysql> select * from staff_records;
+Empty set (0.00 sec)
+
+mysql> desc employees;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| emp_id       | int           | NO   | PRI | NULL    |       |
+| emp_name     | varchar(100)  | YES  |     | NULL    |       |
+| department   | varchar(50)   | YES  |     | NULL    |       |
+| DESIGNATION  | varchar(100)  | YES  |     | NULL    |       |
+| salary       | decimal(10,2) | YES  |     | NULL    |       |
+| joining_date | date          | YES  |     | NULL    |       |
+| CITY         | varchar(100)  | YES  |     | NULL    |       |
+| EMAIL        | varchar(100)  | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employees;
++--------+--------------+------------+-------------+----------+--------------+-----------+-------+
+| emp_id | emp_name     | department | DESIGNATION | salary   | joining_date | CITY      | EMAIL |
++--------+--------------+------------+-------------+----------+--------------+-----------+-------+
+|    101 | Ravi Kumar   | IT         | Developer   | 55000.00 | 2023-01-15   | Vizag     | NULL  |
+|    102 | Priya Sharma | HR         | HR Manager  | 55000.00 | 2022-06-20   | Hyderabad | NULL  |
+|    103 | Kiran Reddy  | IT         | Tester      | 44000.00 | 2023-03-10   | Vizag     | NULL  |
+|    104 | Sneha Rao    | Finance    | Accountant  | 48000.00 | 2021-11-25   | Chennai   | NULL  |
+|    105 | Arun Kumar   | IT         | Developer   | 66000.00 | 2020-08-18   | Bangalore | NULL  |
+|    106 | Divya Reddy  | HR         | Recruiter   | 35000.00 | 2024-01-05   | Vizag     | NULL  |
+|    107 | Suresh Babu  | Sales      | Executive   | 42000.00 | 2022-09-12   | Hyderabad | NULL  |
+|    108 | Anjali Devi  | IT         | Developer   | 77000.00 | 2019-05-30   | Chennai   | NULL  |
+|    109 | Mahesh Kumar | Sales      | Manager     | 65000.00 | 2020-02-14   | Bangalore | NULL  |
+|    110 | Lakshmi Rao  | Finance    | Analyst     | 52000.00 | 2023-07-22   | Hyderabad | NULL  |
++--------+--------------+------------+-------------+----------+--------------+-----------+-------+
+10 rows in set (0.00 sec)
+
+mysql> create table products(
+    -> product_id int primary key,
+    -> product_name varchar(100),
+    -> price decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table orders(
+    -> order_id int primary key,
+    -> customer_name varchar(100),
+    -> product_id int,
+    -> qunatity int,
+    -> foreign key(product_id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 7
+mysql> CREATE TABLE orders (
+    ->     order_id INT PRIMARY KEY,
+    ->     customer_name VARCHAR(100),
+    ->     product_id INT,
+    ->     quantity INT,
+    ->     FOREIGN KEY (product_id) REFERENCES products(product_id)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> create table departments(
+    -> dept_id int primary key,
+    -> dept_name varchar(100)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table doctors(
+    -> doc_id int primary key,
+    -> d_name varchar(100),
+    -> salary decimal(10,2),
+    -> foreign key(dept_id) references departments(dept_id)
+    -> );
+ERROR 1072 (42000): Key column 'dept_id' doesn't exist in table
+mysql> create table doctors(
+    -> doc_id int primary key,
+    -> d_name varchar(100),
+    -> salary decimal(10,2),
+    -> dept_id int,
+    -> foreign key(dept_id) references departments(dept_id)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> drop table doctors;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table doctors(
+    -> doc_id int primary key,
+    -> d_name varchar(100),
+    -> salary decimal(10,2),
+    -> dept_id int,
+    -> foreign key(dept_id) references departments(dept_id)
+    ->
+    -> on delete cascade on update cascade
+    -> );
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> insert into departments values(1,'cardio')
+    -> ^C
+mysql> insert into departments values(1,'cardio');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into departments values(2,'neuro'),(3,'physio'),(4,'ortho');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from departments;
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|       1 | cardio    |
+|       2 | neuro     |
+|       3 | physio    |
+|       4 | ortho     |
++---------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> insert into doctors values(101,'ram',50000.00,1),(102,'laxman'30000.00,2),(103,'karna',40000.00,3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '30000.00,2),(103,'karna',40000.00,3)' at line 1
+mysql>

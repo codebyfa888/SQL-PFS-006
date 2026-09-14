@@ -1,0 +1,298 @@
+DCL commands
+------------
+Grant:  Grant privilege on table name to username;
+ex: grant (select, insert, update on) students to kali;
+
+Revoke: revoke privilege on table name from username;
+ex: revoke insert, update on students from kali;
+
+
+
+
+open c drive (c:)---program files--MySQL---MySQL server8.0--bin
+
+
+
+to login using username:
+                                                
+C:\Program Files\MySQL\MySQL Server 8.0\bin>MySQL -u kali -p
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 31
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql>
+
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 30
+Server version: 8.0.46 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2026, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| da6                |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use da6
+Database changed
+mysql> show tables;
++---------------+
+| Tables_in_da6 |
++---------------+
+| departments   |
+| doctors       |
+| employees     |
+| orders        |
+| products      |
+| staff_records |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> desc employees;
++--------------+---------------+------+-----+---------+-------+
+| Field        | Type          | Null | Key | Default | Extra |
++--------------+---------------+------+-----+---------+-------+
+| emp_id       | int           | NO   | PRI | NULL    |       |
+| emp_name     | varchar(100)  | YES  |     | NULL    |       |
+| department   | varchar(50)   | YES  |     | NULL    |       |
+| DESIGNATION  | varchar(100)  | YES  |     | NULL    |       |
+| salary       | decimal(10,2) | YES  |     | NULL    |       |
+| joining_date | date          | YES  |     | NULL    |       |
+| CITY         | varchar(100)  | YES  |     | NULL    |       |
+| EMAIL        | varchar(100)  | YES  |     | NULL    |       |
++--------------+---------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> select * from employees;
++--------+--------------+------------+-------------+----------+--------------+-----------+-------+
+| emp_id | emp_name     | department | DESIGNATION | salary   | joining_date | CITY      | EMAIL |
++--------+--------------+------------+-------------+----------+--------------+-----------+-------+
+|    101 | Ravi Kumar   | IT         | Developer   | 55000.00 | 2023-01-15   | Vizag     | NULL  |
+|    102 | Priya Sharma | HR         | HR Manager  | 55000.00 | 2022-06-20   | Hyderabad | NULL  |
+|    103 | Kiran Reddy  | IT         | Tester      | 44000.00 | 2023-03-10   | Vizag     | NULL  |
+|    104 | Sneha Rao    | Finance    | Accountant  | 48000.00 | 2021-11-25   | Chennai   | NULL  |
+|    105 | Arun Kumar   | IT         | Developer   | 66000.00 | 2020-08-18   | Bangalore | NULL  |
+|    106 | Divya Reddy  | HR         | Recruiter   | 35000.00 | 2024-01-05   | Vizag     | NULL  |
+|    107 | Suresh Babu  | Sales      | Executive   | 42000.00 | 2022-09-12   | Hyderabad | NULL  |
+|    108 | Anjali Devi  | IT         | Developer   | 77000.00 | 2019-05-30   | Chennai   | NULL  |
+|    109 | Mahesh Kumar | Sales      | Manager     | 65000.00 | 2020-02-14   | Bangalore | NULL  |
+|    110 | Lakshmi Rao  | Finance    | Analyst     | 52000.00 | 2023-07-22   | Hyderabad | NULL  |
++--------+--------------+------------+-------------+----------+--------------+-----------+-------+
+10 rows in set (0.00 sec)
+
+mysql> desc departments;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| dept_id   | int          | NO   | PRI | NULL    |       |
+| dept_name | varchar(100) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from departments;
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|       1 | cardio    |
+|       2 | neuro     |
+|       3 | physio    |
+|       4 | ortho     |
++---------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> desc doctors;
++---------+---------------+------+-----+---------+-------+
+| Field   | Type          | Null | Key | Default | Extra |
++---------+---------------+------+-----+---------+-------+
+| doc_id  | int           | NO   | PRI | NULL    |       |
+| d_name  | varchar(100)  | YES  |     | NULL    |       |
+| salary  | decimal(10,2) | YES  |     | NULL    |       |
+| dept_id | int           | YES  | MUL | NULL    |       |
++---------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from doctors;
+Empty set (0.00 sec)
+
+mysql> insert into doctors values(101,'ram',50000.00,1),(102,'laxman',30000.00,2),(103,'karna',40000.00,3);
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from doctors;
++--------+--------+----------+---------+
+| doc_id | d_name | salary   | dept_id |
++--------+--------+----------+---------+
+|    101 | ram    | 50000.00 |       1 |
+|    102 | laxman | 30000.00 |       2 |
+|    103 | karna  | 40000.00 |       3 |
++--------+--------+----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> create database da_6;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> use database da_6;
+ERROR 1049 (42000): Unknown database 'database'
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| da6                |
+| da_6               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use da_6;
+Database changed
+mysql> create table students(
+    -> sno int primary key,
+    -> sname varchar(30),
+    -> semail varchar(20)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into students values(101,"trident","trident@mail");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from students;
++-----+---------+--------------+
+| sno | sname   | semail       |
++-----+---------+--------------+
+| 101 | trident | trident@mail |
++-----+---------+--------------+
+1 row in set (0.00 sec)
+
+mysql> create user kali identified by 'kali123';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create user mahadev identified by 'mahadev123';
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant select,insert,update on students to kali;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> grant select,drop on students to mahadev;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> revoke insert,update on students from kali;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> revoke select on students from mahadev;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table employees(
+    -> emp_id int auto_increment primary key,
+    -> ename varchar(30),
+    -> esal decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table emp(
+    -> emp_id int primary key,
+    -> ename varchar(30),
+    -> esal decimal(10,2)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into employees values(101,"trident",30000.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employees values(101,"ganesh",40000.00);
+ERROR 1062 (23000): Duplicate entry '101' for key 'employees.PRIMARY'
+mysql> insert into employees values(102,"ganesh",40000.00);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from employees;
++--------+---------+----------+
+| emp_id | ename   | esal     |
++--------+---------+----------+
+|    101 | trident | 30000.00 |
+|    102 | ganesh  | 40000.00 |
++--------+---------+----------+
+2 rows in set (0.00 sec)
+
+mysql> create table products(
+    -> productid int auto_increment primary key,
+    -> pname varchar(50),
+    -> price int,
+    -> quntity int,
+    -> totalamount decimal(10,2) generated always as (price*quantity) stored
+    -> );
+ERROR 1054 (42S22): Unknown column 'quantity' in 'generated column function'
+mysql> create table products(
+    -> productid int auto_increment primary key,
+    -> pname varchar(50),
+    -> price decimal(10,2),
+    -> quntity int,
+    -> totalamount decimal(10,2) generated always as (price*quantity) stored
+    -> );
+ERROR 1054 (42S22): Unknown column 'quantity' in 'generated column function'
+mysql> create table products(
+    -> productid int auto_increment primary key,
+    -> pname varchar(50),
+    -> price decimal(10,2),
+    -> QUANTITY INT,
+    -> TOTALAMOUNT DECIMAL(10,2)GENERATED ALWAYS AS(PRICE*QUANTITY)STORED
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc products;
++-------------+---------------+------+-----+---------+------------------+
+| Field       | Type          | Null | Key | Default | Extra            |
++-------------+---------------+------+-----+---------+------------------+
+| productid   | int           | NO   | PRI | NULL    | auto_increment   |
+| pname       | varchar(50)   | YES  |     | NULL    |                  |
+| price       | decimal(10,2) | YES  |     | NULL    |                  |
+| QUANTITY    | int           | YES  |     | NULL    |                  |
+| TOTALAMOUNT | decimal(10,2) | YES  |     | NULL    | STORED GENERATED |
++-------------+---------------+------+-----+---------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into products(pname,price,quantity,totalamount) values("mobile",'25000.00',2);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into products(pname,price,quantity) values("mobile",'25000.00',2);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products(pname,price,quantity) values("watch",'10000.00',3);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into products(pname,price,quantity) values("laptop",'45000.00',1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from products;
++-----------+--------+----------+----------+-------------+
+| productid | pname  | price    | QUANTITY | TOTALAMOUNT |
++-----------+--------+----------+----------+-------------+
+|         1 | mobile | 25000.00 |        2 |    50000.00 |
+|         2 | watch  | 10000.00 |        3 |    30000.00 |
+|         3 | laptop | 45000.00 |        1 |    45000.00 |
++-----------+--------+----------+----------+-------------+
+3 rows in set (0.00 sec)
+
